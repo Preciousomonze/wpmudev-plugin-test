@@ -5,78 +5,28 @@
  * @link          https://wpmudev.com/
  * @since         1.0.0
  *
- * @author        WPMUDEV (https://wpmudev.com)
  * @package       WPMUDEV\PluginTest
- *
- * @copyright (c) 2023, Incsub (http://incsub.com)
  */
 
 namespace WPMUDEV\PluginTest\App\Admin_Pages;
 
-// Abort if called directly.
 defined( 'WPINC' ) || die;
 
 use WPMUDEV\PluginTest\Base;
-use WPMUDEV\PluginTest\Endpoints\V1\Auth_Confirm;
 
 class Auth extends Base {
-	/**
-	 * The page title.
-	 *
-	 * @var string
-	 */
 	private $page_title;
-
-	/**
-	 * The page slug.
-	 *
-	 * @var string
-	 */
 	private $page_slug = 'wpmudev_plugintest_auth';
-
-	/**
-	 * Google auth credentials.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @var array
-	 */
 	private $creds = array();
-
-	/**
-	 * Option name.
-	 *
-	 * @var string
-	 */
 	private $option_name = 'wpmudev_plugin_tests_auth';
-
-	/**
-	 * Page Assets.
-	 *
-	 * @var array
-	 */
 	private $page_scripts = array();
-
-	/**
-	 * Assets version.
-	 *
-	 * @var string
-	 */
 	private $assets_version = '';
-
-	/**
-	 * A unique string id to be used in markup and jsx.
-	 *
-	 * @var string
-	 */
 	private $unique_id = '';
 
 	/**
 	 * Initializes the page.
 	 *
 	 * @return void
-	 * @since 1.0.0
-	 *
 	 */
 	public function init() {
 		$this->page_title     = __( 'Google Auth', 'wpmudev-plugin-test' );
@@ -90,6 +40,11 @@ class Auth extends Base {
 		add_filter( 'admin_body_class', array( $this, 'admin_body_classes' ) );
 	}
 
+	/**
+	 * Registers the admin page.
+	 *
+	 * @return void
+	 */
 	public function register_admin_page() {
 		$page = add_menu_page(
 			'Google Auth setup',
@@ -97,7 +52,7 @@ class Auth extends Base {
 			'manage_options',
 			$this->page_slug,
 			array( $this, 'callback' ),
-			'dashicons-google',
+				'dashicons-google',
 			6
 		);
 
@@ -182,7 +137,7 @@ class Auth extends Base {
 	}
 
 	/**
-	 * Prepares assets.
+	 * Enqueues assets.
 	 *
 	 * @return void
 	 */
